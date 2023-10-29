@@ -7,17 +7,28 @@ from users.models import User, NULLABLE
 
 class Habit(models.Model):
     """Модель привычки"""
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name="Владелец", **NULLABLE)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL,
+                              verbose_name="Владелец", **NULLABLE)
     place = models.CharField(max_length=150, verbose_name="Место выполнения")
-    time = models.TimeField(default=timezone.now, verbose_name="Время выполнения")
-    action = models.CharField(max_length=150, null=False, blank=False, verbose_name="Действие")
-    is_pleasant = models.BooleanField(default=False, verbose_name="Флаг привычки")
-    link_pleasant = models.ForeignKey("self", on_delete=models.SET_NULL, verbose_name='Связанная привычка', **NULLABLE)
-    award = models.CharField(max_length=150, verbose_name="Вознаграждение", **NULLABLE)
-    frequency = models.PositiveIntegerField(default=1, verbose_name='Периодичность')
-    duration = models.PositiveIntegerField(default=120, verbose_name='Время на выполнение')
-    is_public = models.BooleanField(default=False, verbose_name='Флаг публикации')
-    task = models.ForeignKey(PeriodicTask, on_delete=models.SET_NULL, verbose_name='Ссылка на задачу',
+    time = models.TimeField(default=timezone.now,
+                            verbose_name="Время выполнения")
+    action = models.CharField(max_length=150, null=False, blank=False,
+                              verbose_name="Действие")
+    is_pleasant = models.BooleanField(default=False,
+                                      verbose_name="Флаг привычки")
+    link_pleasant = models.ForeignKey("self", on_delete=models.SET_NULL,
+                                      verbose_name='Связанная привычка',
+                                      **NULLABLE)
+    award = models.CharField(max_length=150, verbose_name="Вознаграждение",
+                             **NULLABLE)
+    frequency = models.PositiveIntegerField(default=1,
+                                            verbose_name='Периодичность')
+    duration = models.PositiveIntegerField(default=120,
+                                           verbose_name='Время на выполнение')
+    is_public = models.BooleanField(default=False,
+                                    verbose_name='Флаг публикации')
+    task = models.ForeignKey(PeriodicTask, on_delete=models.SET_NULL,
+                             verbose_name='Ссылка на задачу',
                              **NULLABLE)
 
     def __str__(self):

@@ -9,6 +9,7 @@ def telegram_bot_updates():
     """Периодическая задача(каждую минуту) на получения команды '/start' и активация пользователя"""
     tg_data = tg_get_updates()
     users = User.objects.filter(is_active=False)
+
     if tg_data['ok'] and tg_data['result'] != []:
         for message in tg_data['result']:
             if message['message']['text'] == "/start":
